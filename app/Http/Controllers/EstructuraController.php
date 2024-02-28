@@ -16,7 +16,7 @@ class EstructuraController extends Controller
     
         // Obtener las secciones principales ordenadas
         $seccionesPrincipales = Seccion::whereNull('seccion_id')
-        ->where('visible',1)
+//        ->where('visible',1)
         ->orderBy('orden')
         ->get();
     
@@ -29,7 +29,7 @@ class EstructuraController extends Controller
     
             // Obtener las subsecciones para esta sección principal
             $subsecciones = Seccion::where('seccion_id', $seccionPrincipal->id)
-                ->where('visible',1)
+                //->where('visible',1)
                 ->orderBy('orden')
                 ->get();
 

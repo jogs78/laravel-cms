@@ -37,9 +37,45 @@ class SeccionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Seccion $seccion)
+    public function show( $seccion)
     {
-        return response()->json($seccion);
+        // Arreglo para almacenar el resultado final
+        $arregloFinal = [];
+        $arreglosubs = [];
+    
+        // Obtener las secciones principales ordenadas
+        $seccionesPrincipales = Seccion::where('id',$seccion)
+//        ->where('visible',1)
+        ->orderBy('orden')
+        ->get();
+    
+    
+        // Iterar sobre cada sección principal
+        $i=0;
+        foreach ($seccionesPrincipales as $seccionPrincipal) {
+            // Agregar la sección principal al arreglo final
+            $arregloFinal[$i]['seccion'] = $seccionPrincipal->toArray();
+    
+            // Obtener las subsecciones para esta sección principal
+            $subsecciones = Seccion::where('seccion_id', $seccionPrincipal->id)
+                //->where('visible',1)
+                ->orderBy('orden')
+                ->get();
+
+//            $arregloFinal[$i]['subsecciones'] = $subsecciones->toArray();
+            
+            // Agregar las subsecciones al arreglo final
+
+            foreach ($subsecciones as $subseccion) {
+                $arregloFinal[$i]['subsecciones'][]=$subseccion->toArray();
+  //              $arregloFinal[] = $subseccion->toArray();
+            }
+        $i++;
+        }
+    
+        // El arreglo final ahora contiene todas las secciones y subsecciones en el orden deseado
+    
+        return response()->json($arregloFinal);
     }
 
     /**
@@ -64,9 +100,9 @@ class SeccionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Seccion $seccion)
+    public function destroy( $id)
     {
-        $copia = $seccion;
+        $seccion = Seccion::find($id);
         $seccion->delete();
         return response()->json("borrado");
 
