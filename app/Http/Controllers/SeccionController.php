@@ -6,6 +6,8 @@ use App\Http\Requests\StoreSeccionRequest;
 use App\Http\Requests\UpdateSeccionRequest;
 use App\Models\Seccion;
 
+use Illuminate\Support\Facades\Log;
+
 class SeccionController extends Controller
 {
     /**
@@ -13,7 +15,41 @@ class SeccionController extends Controller
      */
     public function index()
     {
-        //
+        // Arreglo para almacenar el resultado final
+        $arregloFinal = [];
+        $arreglosubs = [];
+        $sp=[
+            'id'=> 1,
+            'nombre'=> "Seccion Principal",
+            'seccion_id'=> null,
+            'contenido_id'=> null,
+            'tipo'=> "estructura",
+            'orden'=> 0,
+            'visible'=> 1,
+        ];
+
+        // Obtener las secciones principales ordenadas
+        $seccionesPrincipales = Seccion::whereNull('seccion_id')
+//        ->where('visible',1)
+        ->orderBy('orden')
+        ->get();
+    
+    
+        // Agregar la sección principal al arreglo final
+        $arregloFinal[0]['seccion'] = $sp;
+
+        // Obtener las subsecciones para esta sección principal
+        $subsecciones = Seccion::whereNull('seccion_id')
+            //->where('visible',1)
+            ->orderBy('orden')
+            ->get();
+
+        // Agregar las subsecciones al arreglo final
+        foreach ($subsecciones as $subseccion) {
+            $arregloFinal[0]['subsecciones'][]=$subseccion->toArray();
+        }
+
+        return response()->json($arregloFinal);
     }
 
     /**
@@ -29,8 +65,23 @@ class SeccionController extends Controller
      */
     public function store(StoreSeccionRequest $request)
     {
+        $todos = $request->all();
+        foreach ($todos as $key => $value) {
+            Log::channel('depurar')->info("tiene $key => $value");
+        }
+        Log::channel('depurar')->info("visible antes => " . $todos['visible']);
+
+        
+        if($todos['visible']=='undefined' || $todos['visible']== 'false')
+            $todos['visible']=0;
+
+        if($todos['visible'])
+            $todos['visible']=1;
+
+        Log::channel('depurar')->info("visible despues => " . $todos['visible']);
+
         $nueva = new Seccion();
-        $nueva->fill($request->all());
+        $nueva->fill($todos);
         $nueva->save();
     }
 

@@ -18,4 +18,7 @@ class Contenido extends Model
             $table->text('texto');
             $table->timestamps();
 */
+    public function secciones(){
+        return $this->belongsTo(Seccion::class);
+    }
 }

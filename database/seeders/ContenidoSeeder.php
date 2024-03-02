@@ -156,6 +156,23 @@ class ContenidoSeeder extends Seeder
             ['id' =>  14, 'titulo' => 'Noticias & Eventos', 'creacion' => '2020-01-01' , 'vigor' => '2020-01-01', 'texto'=> <<<'EOD'
             ULTIMAS NOTICIAS
             EOD ] ,
+
+            ['id' =>  15, 'titulo' => 'Noticia 1', 'creacion' => '2020-01-01' , 'vigor' => '2020-01-01', 'texto'=> <<<'EOD'
+            ULTIMAS NOTICIAS
+            EOD ] ,
+
+            ['id' =>  16, 'titulo' => 'Noticia 2', 'creacion' => '2020-01-01' , 'vigor' => '2020-01-01', 'texto'=> <<<'EOD'
+            ULTIMAS NOTICIAS
+            EOD ] ,
+
+            ['id' =>  17, 'titulo' => 'Noticia 3', 'creacion' => '2020-01-01' , 'vigor' => '2020-01-01', 'texto'=> <<<'EOD'
+            ULTIMAS NOTICIAS
+            EOD ] ,
+
+            ['id' =>  18, 'titulo' => 'Noticia 1', 'creacion' => '2020-01-01' , 'vigor' => '2020-01-01', 'texto'=> <<<'EOD'
+            ULTIMAS NOTICIAS
+            EOD ] ,
+
         ];
 
         foreach ($entradas as $entrada) {
