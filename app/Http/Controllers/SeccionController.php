@@ -43,7 +43,7 @@ class SeccionController extends Controller
             //->where('visible',1)
             ->orderBy('orden')
             ->get();
-
+//        $arregloFinal[0]['subsecciones']=["."];
         // Agregar las subsecciones al arreglo final
         foreach ($subsecciones as $subseccion) {
             $arregloFinal[0]['subsecciones'][]=$subseccion->toArray();
