@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\PuertaController;
+use App\Http\Controllers\EstructuraController;
+use App\Http\Controllers\ContenidoController;
+use App\Http\Controllers\SeccionController;
+
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +20,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $menu = EstructuraController::principales();
+//    dd($menu);
+    return view('inicio',compact('menu'));
 });
+
+//Route::get('menu',[EstructuraController::class, 'menu']);
+Route::get('estructuras/{cual?}',[EstructuraController::class, 'lisatar']);
+Route::resource('contenidos',ContenidoController::class);
+Route::resource('secciones',SeccionController::class);
+
+Route::get('cms/', function () {
+    return view('Puerta.login');
+});
+Route::post('validar',[PuertaController::class,'validar']);

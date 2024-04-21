@@ -9,7 +9,15 @@ use Illuminate\Support\Collection;
 
 class EstructuraController extends Controller
 {
-    public function menu() {
+    public static function principales(){
+        $seccionesPrincipales = Seccion::whereNull('seccion_id')
+                ->where('visible',1)
+                ->orderBy('orden')
+                ->get();
+        return $seccionesPrincipales;
+    }
+
+    public static function  menu() {
         // Arreglo para almacenar el resultado final
         $arregloFinal = [];
         $arreglosubs = [];
@@ -20,7 +28,7 @@ class EstructuraController extends Controller
         ->orderBy('orden')
         ->get();
     
-    
+        //dd($seccionesPrincipales);
         // Iterar sobre cada sección principal
         $i=0;
         foreach ($seccionesPrincipales as $seccionPrincipal) {
@@ -45,8 +53,8 @@ class EstructuraController extends Controller
         }
     
         // El arreglo final ahora contiene todas las secciones y subsecciones en el orden deseado
-    
-        return response()->json($arregloFinal);
+        return $arregloFinal;
+//        return response()->json($arregloFinal);
     }
     public function lisatar($cual = null){
 
