@@ -39,7 +39,7 @@ class SeccionController extends Controller
         $arregloFinal[0]['seccion'] = $sp;
 
         // Obtener las subsecciones para esta sección principal
-        $subsecciones = Seccion::whereNull('seccion_id')
+        $subsecciones = Seccion::with('contenido')->whereNull('seccion_id')
             //->where('visible',1)
             ->orderBy('orden')
             ->get();

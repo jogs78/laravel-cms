@@ -13,7 +13,18 @@ class ContenidoController extends Controller
      */
     public function index()
     {
-        //
+        $contenido =
+[    
+    "id" => null,
+    "titulo" => "Titulo x",
+    "creacion" => "2020-02-02",
+    "vigor" => "2020-03-03",
+    "texto" => "ULTIMAS NOTICIAS",
+    "created_at" => "2024-03-06T04:29:51.000000Z",
+    "updated_at" => "2024-03-06T04:29:51.000000Z"
+];
+
+        return response()->json($contenido);
     }
 
     /**

@@ -11,4 +11,8 @@ class Seccion extends Model
     protected $table = "secciones";
     protected $fillable = [ 'seccion_id' , 'nombre', 'contenido_id' , 'tipo', 'orden', 'visible'] ;
 
+    public function contenido(){
+        return $this->belongsTo(Contenido::class);
+    }
+
 }
