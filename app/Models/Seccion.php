@@ -14,5 +14,10 @@ class Seccion extends Model
     public function contenido(){
         return $this->belongsTo(Contenido::class);
     }
-
+    public function subSecciones(){
+        return $this->hasMany(Seccion::class)
+        ->where('visible',1)
+        ->orderBy('orden')
+        ->get();
+    }
 }
