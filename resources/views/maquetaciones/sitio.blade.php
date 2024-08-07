@@ -5,8 +5,8 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cobach 35</title>
+    <link rel="stylesheet" href="/otros.css">
     {{--@vite('resources/css/app.css')--}}
-      @vite('resources/css/app.css')
 </head>
 <body>
     <div class="bg-[#1468a8] text-white flex items-center py-4 px-6">
